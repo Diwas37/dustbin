@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet Amount</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script>
+        async function refreshAmount() {
+            const response = await fetch('/get_last_wallet_amount');
+            const data = await response.json();
+            document.getElementById('wallet-amount').innerText = data.amount;
+        }
+
+        window.onload = refreshAmount; // Load amount on page load
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Wallet Balance</h1>
+        <div class="amount">
+            <span id="wallet-amount">Loading...</span> USD
+        </div>
+        <button onclick="refreshAmount()">Refresh</button>
+    </div>
+</body>
+</html>
